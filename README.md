@@ -9,7 +9,7 @@ master
 dev
 dev/user/feature-name or dev/user/bug-fix
 ```
-Copy dev branch for feature branch example: dev/alexsonnysar/address-verification
+Copy dev branch for feature branch example: dev/alexsonnysar/address-verification. Once feature branch is complete make a pull request to merge into dev, and then once dev is stable another pull request to merge into master
 
 ## Getting Started
 
