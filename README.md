@@ -1,5 +1,15 @@
 # uh-se-ecommerce-app
 
+## Github
+
+### Branch naming convention
+
+``` 
+master
+dev
+dev/user/feature-name or dev/user/bug-fix
+```
+Copy dev branch for feature branch example: dev/alexsonnysar/address-verification
 
 ## Getting Started
 
