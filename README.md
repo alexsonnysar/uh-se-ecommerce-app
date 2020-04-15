@@ -6,10 +6,10 @@
 
 ``` 
 master
-dev
+dev/stable
 dev/user/feature-name or dev/user/bug-fix
 ```
-Copy dev branch for feature branch example: dev/alexsonnysar/address-verification. Once feature branch is complete make a pull request to merge into dev, and then once dev is stable another pull request to merge into master
+Copy dev/stable branch to create seperate feature branch. For example: dev/alexsonnysar/address-verification. Once feature branch is complete make a pull request to merge into dev/stable, and then once dev/stable is stable make another pull request to merge into master
 
 ## Getting Started
 
