@@ -1,0 +1,19 @@
+{% extends 'core/base.html' %} 
+
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      {% for product in object_list %}
+      <div class="card mx-auto" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }} ${{ product.price }}</h5>
+            <div class="card text-center">
+              <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
