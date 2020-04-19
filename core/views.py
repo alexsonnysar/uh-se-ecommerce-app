@@ -25,7 +25,7 @@ def add_to_cart(request, slug):
             order_item.save()
     else:
         ordered_date = timezone.now()
-        order = Order.objects.create(user,request.user, ordered_date=ordered_date)
+        order = Order.objects.create(user=request.user, date_ordered=ordered_date)
         order.items.add(order_item)
     return redirect("core:product", slug=slug)
 
