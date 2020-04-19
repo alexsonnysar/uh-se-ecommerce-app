@@ -20,7 +20,7 @@ def add_to_cart(request, slug):
     order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
         order = order_qs[0]
-        if order.items.filter(items__slug=item.slug).exist():
+        if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
     else:
