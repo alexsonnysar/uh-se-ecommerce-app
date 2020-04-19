@@ -9,7 +9,6 @@ class HomeView(ListView):
 def checkout(request):
     return render(request, 'checkout-page.html')
 
-
 class ItemDetailView(DetailView):
     model = Item
     template_name = 'product-page.html'
