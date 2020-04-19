@@ -6,19 +6,30 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
+    description = models.TextField()
+    
 
     def __str__(self):
         return self.name
+
     def get_absolute_url(self):
         return reverse("core:product", kwargs ={
             'slug': self.slug
         })
+    
+    def get_add_to_cart_url(self):
+        return reverse("core:add-to-cart", kwargs ={
+            'slug': self.slug
+        })
+
 
 
 class OrderItem(models.Model):
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
     def __str__(self):
-        return self.name
+        return f"{self.quantity} of {self.item.name}"
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
