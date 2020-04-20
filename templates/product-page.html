@@ -19,6 +19,19 @@
 
 <body>
 
+  <div class = "mt-5 pt-4">
+    {% if messages %}
+      {% for message in messages %}
+      <div class = "alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+         {{ message }}
+         <button type="button" class="close" data-dismiss="alert"  aria-label="Close">
+           <span aria-hidden="true">&times</span> 
+         </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
   <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
@@ -90,6 +103,9 @@
   </nav>
   <!-- Navbar -->
 
+
+ 
+
   <!--Main layout-->
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
@@ -111,28 +127,15 @@
           <!--Content-->
           <div class="p-4">
 
-            <div class="mb-3">
-              <a href="">
-                <span class="badge purple mr-1">Category 2</span>
-              </a>
-              <a href="">
-                <span class="badge blue mr-1">New</span>
-              </a>
-              <a href="">
-                <span class="badge red mr-1">Bestseller</span>
-              </a>
-            </div>
+            <h5 class="font-weight-bold"> {{ object.name }} </h5>
 
             <p class="lead">
-              <span class="mr-1">
-                <del>$200</del>
-              </span>
-              <span>$100</span>
+              <span>${{ object.price|floatformat:2}}</span>
             </p>
 
             <p class="lead font-weight-bold">Description</p>
 
-            <p>{{ object.descrption }}</p>
+            <p>{{ object.description }}</p>
 
             <!-- <form class="d-flex justify-content-left">
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
