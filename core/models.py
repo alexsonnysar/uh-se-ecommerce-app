@@ -2,31 +2,24 @@ from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
 
+
 class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
     description = models.TextField()
-    
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("core:product", kwargs ={
-            'slug': self.slug
-        })
-    
-    def get_add_to_cart_url(self):
-        return reverse("core:add-to-cart", kwargs ={
-            'slug': self.slug
-        })
-        
-    def get_remove_from_cart_url(self):
-        return reverse("core:remove-from-cart", kwargs ={
-            'slug': self.slug
-        }) 
+        return reverse("core:product", kwargs={"slug": self.slug})
 
+    def get_add_to_cart_url(self):
+        return reverse("core:add-to-cart", kwargs={"slug": self.slug})
+
+    def get_remove_from_cart_url(self):
+        return reverse("core:remove-from-cart", kwargs={"slug": self.slug})
 
 
 class OrderItem(models.Model):
@@ -38,12 +31,13 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.item.name}"
 
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
     date_created = models.DateTimeField(auto_now_add=True)
     date_ordered = models.DateTimeField()
     is_ordered = models.BooleanField(default=False)
-    
+
     def __str__(self):
         return self.user.username

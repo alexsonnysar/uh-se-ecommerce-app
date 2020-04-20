@@ -1,26 +1,28 @@
-from django.contrib import messages 
+from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 from django.utils import timezone
 from .models import Item, Order, OrderItem
 
+
 class HomeView(ListView):
     model = Item
-    template_name = 'home-page.html'
+    template_name = "home-page.html"
+
 
 def checkout(request):
-    return render(request, 'checkout-page.html')
+    return render(request, "checkout-page.html")
+
 
 class ItemDetailView(DetailView):
     model = Item
-    template_name = 'product-page.html'
+    template_name = "product-page.html"
+
 
 def add_to_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
-        item=item,
-        user=request.user,
-        is_ordered=False
+        item=item, user=request.user, is_ordered=False
     )
     order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
@@ -37,19 +39,18 @@ def add_to_cart(request, slug):
         date_ordered = timezone.now()
         order = Order.objects.create(user=request.user, date_ordered=date_ordered)
         order.items.add(order_item)
-        messages.info(request, "This item was added to your cart.") 
+        messages.info(request, "This item was added to your cart.")
     return redirect("core:product", slug=slug)
 
-def remove_from_cart(request, slug): 
+
+def remove_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
         order = order_qs[0]
         if order.items.filter(item__slug=item.slug).exists():
-            order_item= OrderItem.objects.filter(
-                item=item,
-                user=request.user,
-                is_ordered=False
+            order_item = OrderItem.objects.filter(
+                item=item, user=request.user, is_ordered=False
             )[0]
             order.items.remove(order_item)
             messages.info(request, "This item was removed to your cart.")
@@ -61,6 +62,3 @@ def remove_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order.")
         return redirect("core:product", slug=slug)
-
-
-
