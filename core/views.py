@@ -30,6 +30,9 @@ class CheckoutView(View):
             same_billing_address = form.cleaned_data.get('same_billing_address')
             save_info = form.cleaned_data.get('save_info')
 
+            print(street_address)
+            print(country)
+
 
             return redirect('core:checkout')
         messages.warning(self.request, "Failed Checkout")
