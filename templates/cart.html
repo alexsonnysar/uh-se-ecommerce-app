@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <body class="mt-5 pt-4">
+    <div class="container">
+
+        <div class="table-responsive text-nowrap">
+            <h1>Order Summary</h1>
+            <table class="table">
+              <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total Item Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for order_item in object.items.all %}
+                <tr>
+                  <th scope="row">{{ forloop.counter }}</th>
+                  <td>{{ order_item.item.name }}</td>
+                  <td>${{ order_item.item.price|floatformat:2 }}</td>
+                  <td><a href="{% url 'core:remove-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>{{ order_item.quantity }}<a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a></td>
+                  <td>
+                    ${{ order_item.get_total_item_price|floatformat:2}}
+                    <a style="color: red;" href="{% url 'core:remove-from-cart' order_item.item.slug %}"><i class="fas fa-trash-alt float-right"></i></a>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Your cart is empty</td>
+                </tr>
+                  {% endfor %}
+                  {% if object.get_total %}
+                <tr>
+                    <td colspan="4"><b>Order Total</b></td>
+                    <td colspan="5"><b>${{ object.get_total|floatformat:2 }}</b></th>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                    <a class="btn btn-warning float-right ml-2" href="/checkout">Proceed to Checkout</a>
+                    <a class="btn btn-primary float-right" href="/">Continue Shopping</a>
+                    </td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+
+          
+          </div>
+    </div>
+</body>
+{% endblock content %}

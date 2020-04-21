@@ -1,32 +1,26 @@
 from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
+from django_countries.fields import CountryField
+
 
 class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
     description = models.TextField()
-    
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("core:product", kwargs ={
-            'slug': self.slug
-        })
-    
-    def get_add_to_cart_url(self):
-        return reverse("core:add-to-cart", kwargs ={
-            'slug': self.slug
-        })
-        
-    def get_remove_from_cart_url(self):
-        return reverse("core:remove-from-cart", kwargs ={
-            'slug': self.slug
-        }) 
+        return reverse("core:product", kwargs={"slug": self.slug})
 
+    def get_add_to_cart_url(self):
+        return reverse("core:add-to-cart", kwargs={"slug": self.slug})
+
+    def get_remove_from_cart_url(self):
+        return reverse("core:remove-from-cart", kwargs={"slug": self.slug})
 
 
 class OrderItem(models.Model):
@@ -38,12 +32,40 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.item.name}"
 
+    def get_total_item_price(self):
+        return self.quantity * self.item.price
+
+    def get_final_price(self):
+        return self.get_total_item_price()
+
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
     date_created = models.DateTimeField(auto_now_add=True)
     date_ordered = models.DateTimeField()
     is_ordered = models.BooleanField(default=False)
-    
+    billing_address = models.ForeignKey(
+        "BillingAddress", on_delete=models.SET_NULL, blank=True, null=True
+    )
+
+    def __str__(self):
+        return self.user.username
+
+    def get_total(self):
+        total = 0
+        for order_item in self.items.all():
+            total += order_item.get_final_price()
+        return total
+
+
+class BillingAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    street_adress = models.CharField(max_length=100)
+    country = CountryField(multiple=True)
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    zip = models.CharField(max_length=100)
+
     def __str__(self):
         return self.user.username
