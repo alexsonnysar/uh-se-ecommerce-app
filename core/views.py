@@ -24,7 +24,6 @@ class CheckoutView(View):
         if form.is_valid():
             name = form.cleaned_data.get("name")
             street_address = form.cleaned_data.get("street_address")
-            apartment_address = form.cleaned_data.get("apartment_address")
             country = form.cleaned_data.get("country")
             state = form.cleaned_data.get("state")
             city = form.cleaned_data.get("city")
