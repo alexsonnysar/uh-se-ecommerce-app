@@ -22,22 +22,22 @@ class CheckoutView(View):
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
         if form.is_valid():
+            name = form.cleaned_data.get("name")
             street_address = form.cleaned_data.get("street_address")
             apartment_address = form.cleaned_data.get("apartment_address")
             country = form.cleaned_data.get("country")
+            state = form.cleaned_data.get("state")
+            city = form.cleaned_data.get("city")
             zip = form.cleaned_data.get("zip")
             same_billing_address = form.cleaned_data.get("same_billing_address")
             save_info = form.cleaned_data.get("save_info")
 
-            print(street_address)
-            print(country)
-
             address = Address(
-                name="Tobin Brown",
-                address_1="1234 Test Ave.",
-                city="Test",
-                state="NE",
-                zipcode="55555",
+                name=name,
+                address_1=street_address,
+                city=city,
+                state=state,
+                zipcode=zip,
             )
 
             usps = USPSApi('097UNIVE5841', test=True)

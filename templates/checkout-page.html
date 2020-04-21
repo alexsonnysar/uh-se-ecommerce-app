@@ -23,6 +23,11 @@
             <form method="POST" class="card-body">
               {%csrf_token%}
 
+              <div class="md-form mb-5">
+                {{ form.name }}
+                <label for="address" class="">Name</label>
+              </div>
+
               <!--address-->
               <div class="md-form mb-5">
                 <!-- <input type="text" id="address" class="form-control" placeholder="1234 Main St"> -->
@@ -48,6 +53,20 @@
                   <div class="invalid-feedback">
                     Please select a valid country.
                   </div>
+
+                </div>
+
+                <div class="col-lg-4 col-md-12 mb-4">
+
+                  <label for="state">State</label>
+                  {{ form.state }}
+
+                </div>
+
+                <div class="col-lg-4 col-md-12 mb-4">
+
+                  <label for="state">City</label>
+                  {{ form.city }}
 
                 </div>
                 <!--Grid column-->
