@@ -6,6 +6,7 @@ from .forms import CheckoutForm
 from .models import Item, Order, OrderItem, BillingAddress
 from usps import USPSApi, Address
 
+
 class HomeView(ListView):
     model = Item
     template_name = "home-page.html"
@@ -13,43 +14,35 @@ class HomeView(ListView):
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
-        #form
+        # form
         form = CheckoutForm()
-        context = {
-            'form': form
-        }
+        context = {"form": form}
         return render(self.request, "checkout-page.html", context)
 
     def post(self, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
         if form.is_valid():
-            street_address = form.cleaned_data.get('street_address')
-            apartment_address = form.cleaned_data.get('apartment_address')
-            country = form.cleaned_data.get('country')
-            zip = form.cleaned_data.get('zip')
-            same_billing_address = form.cleaned_data.get('same_billing_address')
-            save_info = form.cleaned_data.get('save_info')
+            street_address = form.cleaned_data.get("street_address")
+            apartment_address = form.cleaned_data.get("apartment_address")
+            country = form.cleaned_data.get("country")
+            zip = form.cleaned_data.get("zip")
+            same_billing_address = form.cleaned_data.get("same_billing_address")
+            save_info = form.cleaned_data.get("save_info")
 
             print(street_address)
             print(country)
 
             address = Address(
-            name='Tobin Brown',
-            address_1='Test Rd.',
-            city='Houston',
-            state='TX',
-            zipcode='77066'
+                name="Tobin Brown",
+                address_1="1234 Test Ave.",
+                city="Test",
+                state="NE",
+                zipcode="55555",
             )
 
-            usps = USPSApi('097UNIVE5841', test=True)
-            validation = usps.validate_address(address)
-            print(validation.result)
-
-            return redirect('core:checkout')
+            return redirect("core:checkout")
         messages.warning(self.request, "Failed Checkout")
-        return redirect('core:checkout')
-         
-
+        return redirect("core:checkout")
 
 
 class ItemDetailView(DetailView):
