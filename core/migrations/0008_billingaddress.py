@@ -10,19 +10,36 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('core', '0007_auto_20200419_1825'),
+        ("core", "0007_auto_20200419_1825"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='BillingAddress',
+            name="BillingAddress",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('street_adress', models.CharField(max_length=100)),
-                ('apartment_address', models.CharField(max_length=100)),
-                ('country', django_countries.fields.CountryField(max_length=746, multiple=True)),
-                ('zip', models.CharField(max_length=100)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("street_adress", models.CharField(max_length=100)),
+                ("apartment_address", models.CharField(max_length=100)),
+                (
+                    "country",
+                    django_countries.fields.CountryField(max_length=746, multiple=True),
+                ),
+                ("zip", models.CharField(max_length=100)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]
