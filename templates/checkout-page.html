@@ -18,7 +18,7 @@
           <div class="card">
 
             <!--Card content-->
-            <form class="card-body">
+            <form method="POST" class="card-body">
 
               <!--Grid row-->
               <div class="row">
@@ -101,6 +101,7 @@
                   <select class="custom-select d-block w-100" id="state" required>
                     <option value="">Choose...</option>
                     <option>California</option>
+                    <option>Texas</option>
                   </select>
                   <div class="invalid-feedback">
                     Please provide a valid state.
@@ -125,7 +126,7 @@
               <!--Grid row-->
 
               <hr>
-
+              <!--
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" class="custom-control-input" id="same-address">
                 <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
@@ -185,6 +186,7 @@
                 </div>
               </div>
               <hr class="mb-4">
+              -->
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
 
             </form>
