@@ -43,3 +43,8 @@ After activating, install all packages from requirements.txt by running
 You can then launch the server by running
 
 ``` python manage.py runserver ```
+
+### Auto-Formatter
+To format all the .py files within the project please run this command in the root directory
+
+``` black . ```

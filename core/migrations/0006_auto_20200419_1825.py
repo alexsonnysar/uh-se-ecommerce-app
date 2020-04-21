@@ -9,18 +9,23 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('core', '0005_auto_20200419_2239'),
+        ("core", "0005_auto_20200419_2239"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='orderitem',
-            name='is_ordered',
+            model_name="orderitem",
+            name="is_ordered",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='orderitem',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="orderitem",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
