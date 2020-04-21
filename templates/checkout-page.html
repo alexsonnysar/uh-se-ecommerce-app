@@ -3,6 +3,19 @@
 
 {% block content %}
   <!--Main layout-->
+  <div class = "mt-5 pt-4">
+    {% if messages %}
+      {% for message in messages %}
+      <div class = "alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+         {{ message }}
+         <button type="button" class="close" data-dismiss="alert"  aria-label="Close">
+           <span aria-hidden="true">&times</span> 
+         </button>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  
   <main class="mt-5 pt-4">
     <div class="container wow fadeIn">
 
@@ -106,7 +119,7 @@
               <!--Grid row-->
 
               <hr>
-
+              
               <div class="custom-control custom-checkbox">
                 <input {%if form.same_billing_address.value %} checked {%endif%} type="checkbox" class="custom-control-input" name="same_billing_address" id="same-address">
                 <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
@@ -119,17 +132,18 @@
               <hr>
 
               <div class="d-block my-3">
-                <!-- <div class="custom-control custom-radio">
+                <div class="custom-control custom-radio">
                   <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
                   <label class="custom-control-label" for="credit">Credit card</label>
                 </div>
                 <div class="custom-control custom-radio">
                   <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
                   <label class="custom-control-label" for="paypal">Paypal</label>
-                </div> -->
+                </div>
               </div>
               
               <hr class="mb-4">
+             
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
 
             </form>
