@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
+    "crispy_forms",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "core",
+    "django_countries",
 ]
 
 MIDDLEWARE = [

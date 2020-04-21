@@ -1,17 +1,41 @@
 from django.contrib import messages
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .models import Item, Order, OrderItem
-
+from .forms import CheckoutForm
+from .models import Item, Order, OrderItem, BillingAddress
+from usps import USPSApi, Address
 
 class HomeView(ListView):
     model = Item
     template_name = "home-page.html"
 
 
-def checkout(request):
-    return render(request, "checkout-page.html")
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        #form
+        form = CheckoutForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, "checkout-page.html", context)
+
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        if form.is_valid():
+            street_address = form.cleaned_data.get('street_address')
+            apartment_address = form.cleaned_data.get('apartment_address')
+            country = form.cleaned_data.get('country')
+            zip = form.cleaned_data.get('zip')
+            same_billing_address = form.cleaned_data.get('same_billing_address')
+            save_info = form.cleaned_data.get('save_info')
+
+
+            return redirect('core:checkout')
+        messages.warning(self.request, "Failed Checkout")
+        return redirect('core:checkout')
+         
+
 
 
 class ItemDetailView(DetailView):
