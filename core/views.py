@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.decorators import  login_required 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
@@ -20,6 +20,7 @@ def checkout(request):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product-page.html"
+
 
 @login_required
 def add_to_cart(request, slug):
@@ -47,6 +48,7 @@ def add_to_cart(request, slug):
         messages.info(request, "This item was added to your cart.")
         return redirect("core:cart")
 
+
 @login_required
 def remove_item_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
@@ -57,11 +59,11 @@ def remove_item_from_cart(request, slug):
             order_item = OrderItem.objects.filter(
                 item=item, user=request.user, is_ordered=False
             )[0]
-            if order_item.quantity>1:
+            if order_item.quantity > 1:
                 order_item.quantity -= 1
                 order_item.save()
             else:
-                 order.items.remove(order_item)
+                order.items.remove(order_item)
             messages.info(request, "This item quantity was updated.")
             return redirect("core:cart")
         else:
@@ -71,6 +73,7 @@ def remove_item_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order.")
         return redirect("core:product", slug=slug)
+
 
 @login_required
 def remove_from_cart(request, slug):
@@ -99,10 +102,8 @@ class view_cart(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
-            context = {
-                'object': order
-            }
-            return render(self.request, "cart.html", context) 
+            context = {"object": order}
+            return render(self.request, "cart.html", context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("/")

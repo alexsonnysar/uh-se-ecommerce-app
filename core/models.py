@@ -33,7 +33,7 @@ class OrderItem(models.Model):
 
     def get_total_item_price(self):
         return self.quantity * self.item.price
-        
+
     def get_final_price(self):
         return self.get_total_item_price()
 
