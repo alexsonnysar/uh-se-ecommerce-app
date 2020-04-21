@@ -35,12 +35,15 @@ class CheckoutView(View):
 
             address = Address(
             name='Tobin Brown',
-            address_1='1234 Test Ave.',
-            city='Test',
-            state='NE',
-            zipcode='55555'
+            address_1='Test Rd.',
+            city='Houston',
+            state='TX',
+            zipcode='77066'
             )
 
+            usps = USPSApi('097UNIVE5841', test=True)
+            validation = usps.validate_address(address)
+            print(validation.result)
 
             return redirect('core:checkout')
         messages.warning(self.request, "Failed Checkout")
