@@ -44,7 +44,21 @@ class CheckoutView(View):
 
             usps = USPSApi('097UNIVE5841', test=True)
             validation = usps.validate_address(address)
-            print(validation.result)
+            try:
+                valid = validation.result['AddressValidateResponse']['Address']['Address1']
+                billing_address = BillingAddress(
+                    user=self.request.user,
+                    street_adress=street_address,
+                    country=country,
+                    state=state,
+                    city=city,
+                    zip=zip
+                )
+            except:
+                print("address invalid")
+
+          
+
 
             return redirect("core:checkout")
         messages.warning(self.request, "Failed Checkout")
