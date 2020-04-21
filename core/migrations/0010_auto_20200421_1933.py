@@ -6,24 +6,21 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0009_order_billing_address'),
+        ("core", "0009_order_billing_address"),
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='billingaddress',
-            name='apartment_address',
-        ),
+        migrations.RemoveField(model_name="billingaddress", name="apartment_address",),
         migrations.AddField(
-            model_name='billingaddress',
-            name='city',
-            field=models.CharField(default='Houston', max_length=100),
+            model_name="billingaddress",
+            name="city",
+            field=models.CharField(default="Houston", max_length=100),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='billingaddress',
-            name='state',
-            field=models.CharField(default='TX', max_length=100),
+            model_name="billingaddress",
+            name="state",
+            field=models.CharField(default="TX", max_length=100),
             preserve_default=False,
         ),
     ]

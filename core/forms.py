@@ -4,9 +4,7 @@ from django_countries.widgets import CountrySelectWidget
 
 
 class CheckoutForm(forms.Form):
-    name = forms.CharField(widget=forms.TextInput(attrs={
-        "placeholder": "John Smith"
-    }))
+    name = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "John Smith"}))
     street_address = forms.CharField(
         widget=forms.TextInput(attrs={"placeholder": "1234 Main St"})
     )

@@ -42,23 +42,22 @@ class CheckoutView(View):
                 zipcode=zip,
             )
 
-            usps = USPSApi('097UNIVE5841', test=True)
+            usps = USPSApi("097UNIVE5841", test=True)
             validation = usps.validate_address(address)
             try:
-                valid = validation.result['AddressValidateResponse']['Address']['Address1']
+                valid = validation.result["AddressValidateResponse"]["Address"][
+                    "Address1"
+                ]
                 billing_address = BillingAddress(
                     user=self.request.user,
                     street_adress=street_address,
                     country=country,
                     state=state,
                     city=city,
-                    zip=zip
+                    zip=zip,
                 )
             except:
                 print("address invalid")
-
-          
-
 
             return redirect("core:checkout")
         messages.warning(self.request, "Failed Checkout")
@@ -82,18 +81,18 @@ def add_to_cart(request, slug):
         if order.items.filter(item__slug=item.slug).exists():
             order_item.quantity += 1
             order_item.save()
-            #messages.info(request, "This item quantity was updated ")
+            # messages.info(request, "This item quantity was updated ")
             return redirect("core:cart")
 
         else:
-            #messages.info(request, "This item was added to your cart.")
+            # messages.info(request, "This item was added to your cart.")
             order.items.add(order_item)
             return redirect("core:cart")
     else:
         date_ordered = timezone.now()
         order = Order.objects.create(user=request.user, date_ordered=date_ordered)
         order.items.add(order_item)
-        #messages.info(request, "This item was added to your cart.")
+        # messages.info(request, "This item was added to your cart.")
         return redirect("core:cart")
 
 
@@ -112,7 +111,7 @@ def remove_item_from_cart(request, slug):
                 order_item.save()
             else:
                 order.items.remove(order_item)
-            #messages.info(request, "This item quantity was updated.")
+            # messages.info(request, "This item quantity was updated.")
             return redirect("core:cart")
         else:
             messages.info(request, "This item was not in your cart.")
@@ -135,7 +134,7 @@ def remove_from_cart(request, slug):
             )[0]
             order.items.remove(order_item)
             order_item.delete()
-            #messages.info(request, "This item was removed to your cart.")
+            # messages.info(request, "This item was removed to your cart.")
             return redirect("core:cart")
         else:
             messages.info(request, "This item was not in your cart.")
