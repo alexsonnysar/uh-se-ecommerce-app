@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "core",
     "django_countries",
+    "usps",
 ]
 
 MIDDLEWARE = [

@@ -33,6 +33,14 @@ class CheckoutView(View):
             print(street_address)
             print(country)
 
+            address = Address(
+            name='Tobin Brown',
+            address_1='1234 Test Ave.',
+            city='Test',
+            state='NE',
+            zipcode='55555'
+            )
+
 
             return redirect('core:checkout')
         messages.warning(self.request, "Failed Checkout")
