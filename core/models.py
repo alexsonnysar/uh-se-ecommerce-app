@@ -51,6 +51,8 @@ class BillingAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     street_adress = models.CharField(max_length=100)
     country = CountryField(multiple=True)
+    state = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
     zip = models.CharField(max_length=100)
 
     def __str__(self):
