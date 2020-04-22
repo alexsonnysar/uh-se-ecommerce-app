@@ -148,27 +148,9 @@
 
               <hr>
               
-              <div class="custom-control custom-checkbox">
-                <input {%if form.same_billing_address.value %} checked {%endif%} type="checkbox" class="custom-control-input" name="same_billing_address" id="same-address">
-                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-              </div>
-              <div class="custom-control custom-checkbox">
-                <input {%if form.save_info.value %} checked {%endif%}type="checkbox" class="custom-control-input" name="save-info" id="save-info">
-                <label class="custom-control-label" for="save-info">Save this information for next time</label>
-              </div>
 
               <hr>
 
-              <div class="d-block my-3">
-                <div class="custom-control custom-radio">
-                  <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                  <label class="custom-control-label" for="credit">Credit card</label>
-                </div>
-                <div class="custom-control custom-radio">
-                  <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="paypal">Paypal</label>
-                </div>
-              </div>
               
               <hr class="mb-4">
              
