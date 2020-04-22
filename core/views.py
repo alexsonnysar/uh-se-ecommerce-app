@@ -168,7 +168,7 @@ class order_confirmation(View):
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
             billing = BillingAddress.objects.get(user=self.request.user)
-            context = {"object": order, "object2":billing}
+            context = {"object": order, "object2":billing, "user":self.request.user}
             return render(self.request, "order-confirmation.html", context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
