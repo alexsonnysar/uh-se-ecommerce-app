@@ -56,8 +56,9 @@ class CheckoutView(View):
                     city=city,
                     zip=zip,
                 )
+                billing_address.save()
             except:
-                print("address invalid")
+                messages.warning(self.request, "Not a Valid Address")
 
             return redirect("core:checkout")
         messages.warning(self.request, "Failed Checkout")
