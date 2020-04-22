@@ -35,7 +35,7 @@
             <!--Card content-->
             <form method="POST" class="card-body">
               {%csrf_token%}
-
+              <b>Shipping Address</b>
               <div class="md-form mb-5">
                 {{ form.name }}
                 <label for="address" class="">Name</label>
@@ -117,6 +117,34 @@
 
               </div>
               <!--Grid row-->
+              <hr>
+
+              <b>Payment</b>
+
+              <div class="row">
+                <div class="mb-5">
+                  <label for="text">Card Holder Name</label><br>
+                  {{ form.cardname }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5">
+                  <label for="number">Card Number</label><br>
+                  {{ form.cardnumber }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="md-form mb-5">
+                  <label for="address" class="">Card Expiration Date</label><br><br><br>
+                  {{ form.cardexperiation }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5">
+                  <label for="cvc">CVC</label><br>
+                  {{ form.cardcvc }}
+                </div>
+              </div>
 
               <hr>
               
