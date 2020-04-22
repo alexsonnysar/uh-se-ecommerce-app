@@ -56,7 +56,14 @@ class CheckoutView(View):
                     city=city,
                     zip=zip,
                 )
-                billing_address.save()
+                existingaddress = BillingAddress.objects.filter(user=self.request.user).count()
+                if existingaddress!=0:
+                    BillingAddress.objects.filter(user=self.request.user).delete()
+                    billing_address.save()
+                    return redirect("core:order-confirmation")
+                else:
+                    billing_address.save()
+                    return redirect("core:order-confirmation")
             except:
                 messages.warning(self.request, "Not a Valid Address")
 
@@ -155,3 +162,15 @@ class view_cart(LoginRequiredMixin, View):
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("/")
+
+class order_confirmation(View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, is_ordered=False)
+            billing = BillingAddress.objects.get(user=self.request.user)
+            context = {"object": order, "object2":billing}
+            return render(self.request, "order-confirmation.html", context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect("/")
+
