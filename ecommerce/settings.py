@@ -133,3 +133,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+
+# Django Crispy Forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
