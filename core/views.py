@@ -48,7 +48,7 @@ class CheckoutView(View):
                 ]
                 billing_address = BillingAddress(
                     user=self.request.user,
-                    street_adress=street_address,
+                    street_address=street_address,
                     country=country,
                     state=state,
                     city=city,
