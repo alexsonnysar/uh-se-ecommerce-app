@@ -8,6 +8,9 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
+    picture = models.TextField(
+        default="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&w=1000&q=80"
+    )
     description = models.TextField()
 
     def __str__(self):
@@ -20,7 +23,7 @@ class Item(models.Model):
         return reverse("core:add-to-cart", kwargs={"slug": self.slug})
 
     def get_remove_from_cart_url(self):
-        return reverse("core:remove-from-cart", kwargs={"slug": self.slug})
+        return reverse("core:remove-item-from-cart", kwargs={"slug": self.slug})
 
 
 class OrderItem(models.Model):
@@ -61,7 +64,7 @@ class Order(models.Model):
 
 class BillingAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    street_adress = models.CharField(max_length=100)
+    street_address = models.CharField(max_length=100)
     country = CountryField(multiple=True)
     state = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
