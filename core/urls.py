@@ -7,7 +7,7 @@ from .views import (
     remove_from_cart,
     view_cart,
     remove_item_from_cart,
-    order_confirmation
+    order_confirmation,
 )
 
 app_name = "core"
@@ -24,5 +24,7 @@ urlpatterns = [
         remove_item_from_cart,
         name="remove-item-from-cart",
     ),
-    path("order-confirmation/", order_confirmation.as_view(), name="order-confirmation")
+    path(
+        "order-confirmation/", order_confirmation.as_view(), name="order-confirmation"
+    ),
 ]

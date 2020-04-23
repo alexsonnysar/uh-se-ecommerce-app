@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0012_remove_item_picture'),
+        ("core", "0012_remove_item_picture"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='item',
-            name='picture',
-            field=models.TextField(default='https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&w=1000&q=80'),
+            model_name="item",
+            name="picture",
+            field=models.TextField(
+                default="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&w=1000&q=80"
+            ),
             preserve_default=False,
         ),
     ]

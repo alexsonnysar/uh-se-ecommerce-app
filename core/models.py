@@ -8,7 +8,9 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
-    picture = models.TextField()
+    picture = models.TextField(
+        default="https://images.unsplash.com/photo-1518020382113-a7e8fc38eac9?ixlib=rb-1.2.1&w=1000&q=80"
+    )
     description = models.TextField()
 
     def __str__(self):

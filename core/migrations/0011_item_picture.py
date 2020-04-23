@@ -6,14 +6,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0010_auto_20200421_1933'),
+        ("core", "0010_auto_20200421_1933"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='item',
-            name='picture',
-            field=models.TextField(default='https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/277/277432/raw-beetroot-on-a-wooden-surface.jpg?w=1155&h=1444'),
+            model_name="item",
+            name="picture",
+            field=models.TextField(
+                default="https://i0.wp.com/cdn-prod.medicalnewstoday.com/content/images/articles/277/277432/raw-beetroot-on-a-wooden-surface.jpg?w=1155&h=1444"
+            ),
             preserve_default=False,
         ),
     ]
