@@ -8,7 +8,7 @@ from .views import (
     view_cart,
     remove_item_from_cart,
     order_confirmation,
-    Previous_Orders
+    Previous_Orders,
 )
 
 app_name = "core"
@@ -28,5 +28,5 @@ urlpatterns = [
     path(
         "order-confirmation/", order_confirmation.as_view(), name="order-confirmation"
     ),
-    path("history/", Previous_Orders.as_view(), name="history")
+    path("history/", Previous_Orders.as_view(), name="history"),
 ]
