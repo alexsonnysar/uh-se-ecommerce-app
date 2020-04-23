@@ -1,23 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class = "mt-5 pt-4">
-  {% if messages %}
-    {% for message in messages %}
-    <div class = "alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-       {{ message }}
-       <button type="button" class="close" data-dismiss="alert"  aria-label="Close">
-         <span aria-hidden="true">&times</span> 
-       </button>
-    </div>
-    {% endfor %}
-  {% endif %}
-</div>
   <body class="mt-5 pt-4">
     <div class="container">
 
         <div class="table-responsive text-nowrap">
-            <h1>Order Summary</h1>
+            <h1>Order Confirmation</h1>
             <table class="table">
               <thead>
                 <tr>
@@ -34,10 +22,9 @@
                   <th scope="row">{{ forloop.counter }}</th>
                   <td>{{ order_item.item.name }}</td>
                   <td>${{ order_item.item.price|floatformat:2 }}</td>
-                  <td><a href="{% url 'core:remove-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>{{ order_item.quantity }}<a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a></td>
+                  <td>{{ order_item.quantity }}</td>
                   <td>
                     ${{ order_item.get_total_item_price|floatformat:2}}
-                    <a style="color: red;" href="{% url 'core:remove-from-cart' order_item.item.slug %}"><i class="fas fa-trash-alt float-right"></i></a>
                   </td>
                 </tr>
                 {% empty %}
@@ -50,16 +37,32 @@
                     <td colspan="4"><b>Order Total</b></td>
                     <td colspan="5"><b>${{ object.get_total|floatformat:2 }}</b></th>
                 </tr>
-                <tr>
-                    <td colspan="5">
-                    <a class="btn btn-warning float-right ml-2" href="/checkout">Proceed to Checkout</a>
-                    <a class="btn btn-primary float-right" href="/">Continue Shopping</a>
-                    </td>
-                </tr>
                 {% endif %}
               </tbody>
             </table>
 
+
+            <hr>
+            <div class="row justify-content-md-center">
+                <div class="col-lg-6">
+                    <b>User:</b>
+                </div>
+                <div class="col-lg-6">
+                    {{ user }}
+                </div>
+            </div><br><br>
+
+            <div class="row justify-content-md-center">
+                <div class="col-lg-6">
+                    <b>Mailing Address:</b>
+                </div>
+                <div class="col-lg-6">
+                    {{ object2.street_adress }}<br>
+                    {{ object2.country }}<br>
+                    {{ object2.state }}, {{ object2.city }}, {{ object2.zip }}
+                </div>
+                
+            </div>
           
           </div>
     </div>

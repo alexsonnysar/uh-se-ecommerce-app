@@ -16,3 +16,8 @@ class CheckoutForm(forms.Form):
     zip = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
     same_billing_address = forms.BooleanField(required=False)
     save_info = forms.BooleanField(required=False)
+
+    cardname = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Enter Name"}))
+    cardnumber = forms.IntegerField(widget=forms.NumberInput(attrs={"placeholder": "Enter Card Number"}))
+    cardexperiation = forms.DateField(widget=forms.SelectDateWidget())
+    cardcvc = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "CVC"}))

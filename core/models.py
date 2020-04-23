@@ -8,6 +8,7 @@ class Item(models.Model):
     name = models.CharField(max_length=100)
     price = models.FloatField()
     slug = models.SlugField()
+    picture = models.TextField()
     description = models.TextField()
 
     def __str__(self):
