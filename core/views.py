@@ -178,3 +178,14 @@ class order_confirmation(View):
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("/")
+
+
+class Previous_Orders(DetailView):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.filter(user=self.request.user, is_ordered=True)
+            context = {"object": order}
+            return render(self.request, "history.html", context)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have any previous orders")
+            return redirect("/")

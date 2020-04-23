@@ -94,8 +94,13 @@
             <a class="nav-link waves-effect" href="/">Home
             </a>
           </li>
+          {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link waves-effect" href="/checkout">Checkout
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="/history">Previous Orders
             </a>
           </li>
           <!--
@@ -107,7 +112,6 @@
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">
-          {% if request.user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link ">
               {{ request.user|get_name}} 
