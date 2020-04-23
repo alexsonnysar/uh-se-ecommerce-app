@@ -46,6 +46,6 @@ class TestUrls(SimpleTestCase):
         url = reverse("core:order-confirmation")
         self.assertEqual(resolve(url).func.view_class, OrderConfirmationView)
 
-    def test_my_order_url(self):
+    def test_my_orders_url(self):
         url = reverse("core:history")
         self.assertEquals(resolve(url).func.view_class, MyOrdersViews)
