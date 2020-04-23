@@ -13,7 +13,12 @@
 
           {% for item in object_list %}
           <div class="col-lg-3 col-md-6 mb-4">
-            <div class="card-body text-center">        
+            <div class="card-body text-center">
+              <h3>
+                <strong>
+                  <img src="{{ item.picture }}"  class="img-fluid" width="200" height="150">
+                </strong>
+              </h3>   
               <h5>
                 <strong>
                   <a href="{{ item.get_absolute_url }}" class="dark-grey-text">{{ item.name }}</a>

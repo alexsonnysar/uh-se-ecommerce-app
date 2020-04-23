@@ -10,3 +10,8 @@ def get_cart_item_count(user):
         if qs.exists():
             return qs[0].items.count()
     return 0
+
+@register.filter
+def get_name(user):
+    if user.is_authenticated:
+        return user.username
