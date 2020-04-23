@@ -22,10 +22,10 @@
                   <th scope="row">{{ forloop.counter }}</th>
                   <td>{{ order_item.item.name }}</td>
                   <td>${{ order_item.item.price|floatformat:2 }}</td>
-                  <td><a href="{% url 'core:remove-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>{{ order_item.quantity }}<a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a></td>
+                  <td><a href="{% url 'core:item-quantity-reduction' order_item.item.slug %}"><i class="fas fa-minus mr-2"></i></a>{{ order_item.quantity }}<a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus ml-2"></i></a></td>
                   <td>
                     ${{ order_item.get_total_item_price|floatformat:2}}
-                    <a style="color: red;" href="{% url 'core:remove-from-cart' order_item.item.slug %}"><i class="fas fa-trash-alt float-right"></i></a>
+                    <a style="color: red;" href="{% url 'core:remove-item-from-cart' order_item.item.slug %}"><i class="fas fa-trash-alt float-right"></i></a>
                   </td>
                 </tr>
                 {% empty %}

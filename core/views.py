@@ -31,8 +31,6 @@ class CheckoutView(View):
             state = form.cleaned_data.get("state")
             city = form.cleaned_data.get("city")
             zip = form.cleaned_data.get("zip")
-            same_billing_address = form.cleaned_data.get("same_billing_address")
-            save_info = form.cleaned_data.get("save_info")
 
             address = Address(
                 name=name,
@@ -56,10 +54,10 @@ class CheckoutView(View):
                     city=city,
                     zip=zip,
                 )
-                existingaddress = BillingAddress.objects.filter(
+                existing_address = BillingAddress.objects.filter(
                     user=self.request.user
                 ).count()
-                if existingaddress != 0:
+                if existing_address != 0:
                     BillingAddress.objects.filter(user=self.request.user).delete()
                     billing_address.save()
                     return redirect("core:order-confirmation")
@@ -107,7 +105,7 @@ def add_to_cart(request, slug):
 
 
 @login_required
-def remove_item_from_cart(request, slug):
+def item_quantity_reduction(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
@@ -133,7 +131,7 @@ def remove_item_from_cart(request, slug):
 
 
 @login_required
-def remove_from_cart(request, slug):
+def remove_item_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(user=request.user, is_ordered=False)
     if order_qs.exists():
@@ -155,7 +153,7 @@ def remove_from_cart(request, slug):
         return redirect("core:product", slug=slug)
 
 
-class view_cart(LoginRequiredMixin, View):
+class CartView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
@@ -166,7 +164,7 @@ class view_cart(LoginRequiredMixin, View):
             return redirect("/")
 
 
-class order_confirmation(View):
+class OrderConfirmationView(View):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.get(user=self.request.user, is_ordered=False)
@@ -180,7 +178,7 @@ class order_confirmation(View):
             return redirect("/")
 
 
-class Previous_Orders(DetailView):
+class MyOrdersViews(DetailView):
     def get(self, *args, **kwargs):
         try:
             order = Order.objects.filter(user=self.request.user, is_ordered=True)
