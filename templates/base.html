@@ -11,6 +11,7 @@
   <title>{% block head_title %}{% endblock %}</title>
   {% block extra_head %}
   {% endblock %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'onlineshop_78377.ico' %}"/>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
   <!-- Bootstrap core CSS -->
@@ -76,7 +77,8 @@
 
       <!-- Brand -->
       <a class="navbar-brand waves-effect" href="#">
-        <strong class="blue-text">Ecommerce Site</strong>
+        <img src="{% static 'onlineshop_78377.ico' %}" width="40" height="40" alt="">
+        <!-- <strong class="blue-text">Ecommerce Site</strong> -->
       </a>
 
       <!-- Collapse -->
