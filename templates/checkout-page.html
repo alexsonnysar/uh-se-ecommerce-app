@@ -121,7 +121,7 @@
 
               <b>Payment</b>
 
-              <div class="row">
+              <!-- <div class="row">
                 <div class="mb-5">
                   <label for="text">Card Holder Name</label><br>
                   {{ form.cardname }}
@@ -144,8 +144,25 @@
                   <label for="cvc">CVC</label><br>
                   {{ form.cardcvc }}
                 </div>
+              </div> -->
+              <div class="row">
+                <div class="mb-5">
+                  <br><label>Card Number:</label><br>
+                  <input type="number" placeholder="Enter Number" required maxlength="16" minlength="16">
+                </div>
               </div>
-
+              <div class="row">
+                <div class="mb-5">
+                  <br><label>Expiration Date:</label><br>
+                  <input type="number" placeholder="Enter Month" required maxlength="2" minlength="1" size="1"><input type="number" placeholder="Enter Year" required maxlength="4" minlength="4" size="1">
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-5">
+                  <br><label>CVC:</label><br>
+                  <input type="number" placeholder="Enter CVC" required maxlength="3" minlength="3">
+                </div>
+              </div>
               
               <hr class="mb-4">
              
