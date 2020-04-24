@@ -9,31 +9,31 @@ from core.models import (
 )
 import json
 
+
 class TestViews(TestCase):
     def setUp(self):
         self.client = Client()
-        self.home_url = reverse('core:home')
-        self.checkout_url = reverse('core:checkout')
-        self.item_detail_url = reverse('core:product', args=["beef"])
-        self.cart_url = reverse('core:cart')
-        self.order_confirmation_url = reverse('core:order-confirmation')
-        self.my_orders_url = reverse('core:history')
+        self.home_url = reverse("core:home")
+        self.checkout_url = reverse("core:checkout")
+        self.item_detail_url = reverse("core:product", args=["beef"])
+        self.cart_url = reverse("core:cart")
+        self.order_confirmation_url = reverse("core:order-confirmation")
+        self.my_orders_url = reverse("core:history")
         self.beef = Item.objects.create(
-            name='beef',
-            price=5
+            name="beef", price=5, slug="beef", description="Texas Angus Beef"
         )
 
     def test_home_view_GET(self):
         response = self.client.get(self.home_url)
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'home-page.html')
+        self.assertTemplateUsed(response, "home-page.html")
 
     def test_checkout_view_GET(self):
         response = self.client.get(self.checkout_url)
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'checkout-page.html')
+        self.assertTemplateUsed(response, "checkout-page.html")
 
     def test_checkout_view_POST(self):
         pass
@@ -42,7 +42,7 @@ class TestViews(TestCase):
         response = self.client.get(self.item_detail_url)
 
         self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response, 'product-page.html')
+        self.assertTemplateUsed(response, "product-page.html")
 
     def test_add_to_cart(self):
         pass
@@ -52,7 +52,7 @@ class TestViews(TestCase):
 
     def test_remove_item_from_cart(self):
         pass
-    
+
     def test_cart_view_GET_with_order(self):
         pass
         # response = self.client.get(self.cart_url)
@@ -76,11 +76,9 @@ class TestViews(TestCase):
 
     def test_my_orders_view_GET_with_order(self):
         pass
-    
+
     def test_my_orders_view_GET_no_order(self):
         pass
         # response = self.client.get(self.my_orders_url)
 
         # self.assertEquals(response.status_code, 302)
-
-

@@ -163,6 +163,7 @@ class CartView(LoginRequiredMixin, View):
             messages.error(self.request, "You do not have an active order")
             return redirect("/")
 
+
 class OrderConfirmationView(View):
     def get(self, *args, **kwargs):
         try:
