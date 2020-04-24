@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.text import slugify
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
@@ -24,6 +25,10 @@ class Item(models.Model):
 
     def get_remove_from_cart_url(self):
         return reverse("core:remove-item-from-cart", kwargs={"slug": self.slug})
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Item, self).save(*args, **kwargs)
 
 
 class OrderItem(models.Model):
