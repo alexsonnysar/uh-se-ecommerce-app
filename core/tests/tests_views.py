@@ -17,6 +17,7 @@ class TestViews(TestCase):
         self.item_detail_url = reverse('core:product', args=["beef"])
         self.cart_url = reverse('core:cart')
         self.order_confirmation_url = reverse('core:order-confirmation')
+        self.my_orders_url = reverse('core:history')
         self.beef = Item.objects.create(
             name='beef',
             price=5
@@ -53,11 +54,11 @@ class TestViews(TestCase):
         pass
     
     def test_cart_view_GET_with_order(self):
+        pass
         # response = self.client.get(self.cart_url)
 
         # self.assertEquals(response.status_code, 200)
         # self.assertTemplateUsed(response, 'cart.html')
-        pass
 
     def test_cart_view_GET_no_order(self):
         response = self.client.get(self.cart_url)
@@ -67,13 +68,19 @@ class TestViews(TestCase):
     def test_order_confirmation_view_GET_with_order(self):
         pass
 
-    # def test_order_confirmation_view_GET_no_order(self):
-    #     response = self.client.get(self.order_confirmation_url)
+    def test_order_confirmation_view_GET_no_order(self):
+        pass
+        # response = self.client.get(self.order_confirmation_url)
 
-    #     self.assertEquals(response.status_code, 302)
+        # self.assertEquals(response.status_code, 302)
 
-    def test_my_orders_view_GET(self):
+    def test_my_orders_view_GET_with_order(self):
         pass
     
+    def test_my_orders_view_GET_no_order(self):
+        pass
+        # response = self.client.get(self.my_orders_url)
+
+        # self.assertEquals(response.status_code, 302)
 
 
