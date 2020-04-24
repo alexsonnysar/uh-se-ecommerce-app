@@ -9,7 +9,7 @@ from core.models import (
 import json
 
 class TestViews(TestCase):
-    def set_up(self):
+    def setUp(self):
         self.client = Client()
         self.home_url = reverse('core:home')
 
