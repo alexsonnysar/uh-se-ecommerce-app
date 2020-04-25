@@ -44,7 +44,20 @@ You can then launch the server by running
 
 ``` python manage.py runserver ```
 
+### Django Admin
+```
+Username: admin
+
+Password: password
+```
+
 ### Auto-Formatter
 To format all the .py files within the project please run this command in the root directory
 
 ``` black . ```
+
+### requirements.txt
+
+If you fork this repo and add any new packages please run pip freeze
+
+``` pip freeze > requirements.txt ```

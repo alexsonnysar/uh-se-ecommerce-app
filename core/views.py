@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .forms import CheckoutForm
+from .forms import CheckoutForm, PaymentForm
 from .models import Item, Order, OrderItem, BillingAddress
 from usps import USPSApi, Address
 
@@ -19,7 +19,8 @@ class CheckoutView(View):
     def get(self, *args, **kwargs):
         # form
         form = CheckoutForm()
-        context = {"form": form}
+        form2 = PaymentForm()
+        context = {"form": form, "form2": form2}
         return render(self.request, "checkout-page.html", context)
 
     def post(self, *args, **kwargs):
@@ -170,7 +171,8 @@ class OrderConfirmationView(View):
             order = Order.objects.get(user=self.request.user, is_ordered=False)
             qs = Order.objects.filter(user=self.request.user, is_ordered=False)
             billing = BillingAddress.objects.get(user=self.request.user)
-            context = {"object": order, "object2": billing, "user": self.request.user}
+            country = billing.country[0].name
+            context = {"object": order, "object2": billing, "country": country, "user": self.request.user}
             qs.update(is_ordered=True)
             return render(self.request, "order-confirmation.html", context)
         except ObjectDoesNotExist:
@@ -181,7 +183,7 @@ class OrderConfirmationView(View):
 class MyOrdersViews(DetailView):
     def get(self, *args, **kwargs):
         try:
-            order = Order.objects.filter(user=self.request.user, is_ordered=True)
+            order = Order.objects.filter(user=self.request.user, is_ordered=True).order_by('-date_ordered')
             context = {"object": order}
             return render(self.request, "history.html", context)
         except ObjectDoesNotExist:
