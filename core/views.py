@@ -182,7 +182,7 @@ class OrderConfirmationView(View):
 class MyOrdersViews(DetailView):
     def get(self, *args, **kwargs):
         try:
-            order = Order.objects.filter(user=self.request.user, is_ordered=True)
+            order = Order.objects.filter(user=self.request.user, is_ordered=True).order_by('-date_ordered')
             context = {"object": order}
             return render(self.request, "history.html", context)
         except ObjectDoesNotExist:
