@@ -7,7 +7,7 @@
     <div class="container wow fadeIn">
 
       <!-- Heading -->
-      <h2 class="my-5 h2 text-center">Checkout form</h2>
+      <h2 class="my-5 h2 text-center">Checkout Form</h2>
 
       <!--Grid row-->
       <div class="row">
@@ -17,133 +17,18 @@
 
           <!--Card-->
           <div class="card">
-
-
             <!--Card content-->
             <form method="POST" class="card-body">
               {%csrf_token%}
-              <b>Shipping Address</b>
-              <div class="md-form mb-5">
-                {{ form.name }}
-                <label for="address" class="">Name</label>
-              </div>
-
-              <!--address-->
-              <div class="md-form mb-5">
-                <!-- <input type="text" id="address" class="form-control" placeholder="1234 Main St"> -->
-                {{ form.street_address}}
-                <label for="address" class="">Address</label>
-              </div>
-
-              <!--Grid row-->
-              <div class="row">
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
-
-                  <label for="country">City</label>
-                  {{ form.city }}
-                  <div class="invalid-feedback">
-                    Please select a valid City.
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <label for="zip">State</label>
-                  <!-- <input type="text" class="form-control" id="zip" placeholder="" required> -->
-                  {{ form.state }}
-                  <div class="invalid-feedback">
-                    State required
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-              </div>
-              <!--Grid row-->
-
-              <!--Grid row-->
-              <div class="row">
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-12 mb-4">
-
-                  <label for="country">Country</label>
-                  {{ form.country }}
-                  <div class="invalid-feedback">
-                    Please select a valid country.
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-lg-4 col-md-6 mb-4">
-
-                  <label for="zip">Zip</label>
-                  <!-- <input type="text" class="form-control" id="zip" placeholder="" required> -->
-                  {{ form.zip }}
-                  <div class="invalid-feedback">
-                    Zip code required.
-                  </div>
-
-                </div>
-                <!--Grid column-->
-
-              </div>
-              <!--Grid row-->
-              <hr>
-
-              <b>Payment</b>
-
-              <div class="row">
-                <div class="col-md-12 mb-4">
-                  <div class="mb-5">
-                    <br><label>Card Number:</label><br>
-                    <input type="number" placeholder="Enter Number" required>
-                  </div>
-
-                  <div class="mb-5">
-                    <br><label>Expiration Date:</label><br>
-                    <input type="number" placeholder="Enter Month"><input type="number" placeholder="Enter Year" required>
-                  </div>
-
-                  <div class="mb-5">
-                    <br><label>CVC:</label><br>
-                    <input type="number" placeholder="Enter CVC" required>
-                  </div>
-                </div>
-              </div>
-              
-              <hr class="mb-4">
-             
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-
+              <h2>Shipping Information</h2>
+              {{ form|crispy }}
+              <h3>Payment Information</h3> 
+              {{ form2|crispy}} 
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Order</button>            
             </form>
-
           </div>
+
           <!--/.Card-->
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-md-4 mb-4">
-
-
-          
 
         </div>
         <!--Grid column-->
