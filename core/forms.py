@@ -11,11 +11,14 @@ class CheckoutForm(forms.Form):
     country = CountryField(blank_label="(select country)").formfield(
         widget=CountrySelectWidget(attrs={"class": "custom-select d-block w-100"})
     )
-    state = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "TX"}))
+    state = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "State"}))
     city = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "City"}))
     zip = forms.CharField(widget=forms.TextInput(attrs={"class": "form-control"}))
-    same_billing_address = forms.BooleanField(required=False)
-    save_info = forms.BooleanField(required=False)
+
+    card_number = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Enter Card Number"}))
+
+    # same_billing_address = forms.BooleanField(required=False)
+    # save_info = forms.BooleanField(required=False)
 
     # cardname = forms.CharField(
     #     widget=forms.TextInput(attrs={"placeholder": "Enter Name"})
@@ -29,3 +32,6 @@ class CheckoutForm(forms.Form):
     # cardnumber = CardNumberField(label='Card Number')
     # cardexperiation = CardExpiryField(label='Expiration Date')
     # cardcvc = SecurityCodeField(label='CVV/CVC')
+
+class PaymentForm(forms.Form):
+    card_number = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "Enter Card Number"}))

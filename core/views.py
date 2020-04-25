@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, View
 from django.utils import timezone
-from .forms import CheckoutForm
+from .forms import CheckoutForm, PaymentForm
 from .models import Item, Order, OrderItem, BillingAddress
 from usps import USPSApi, Address
 
@@ -19,7 +19,8 @@ class CheckoutView(View):
     def get(self, *args, **kwargs):
         # form
         form = CheckoutForm()
-        context = {"form": form}
+        form2 = PaymentForm()
+        context = {"form": form, "form2": form2}
         return render(self.request, "checkout-page.html", context)
 
     def post(self, *args, **kwargs):
