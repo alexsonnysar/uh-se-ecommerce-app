@@ -171,7 +171,8 @@ class OrderConfirmationView(View):
             order = Order.objects.get(user=self.request.user, is_ordered=False)
             qs = Order.objects.filter(user=self.request.user, is_ordered=False)
             billing = BillingAddress.objects.get(user=self.request.user)
-            context = {"object": order, "object2": billing, "user": self.request.user}
+            country = billing.country[0].name
+            context = {"object": order, "object2": billing, "country": country, "user": self.request.user}
             qs.update(is_ordered=True)
             return render(self.request, "order-confirmation.html", context)
         except ObjectDoesNotExist:
