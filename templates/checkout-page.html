@@ -17,28 +17,18 @@
 
           <!--Card-->
           <div class="card">
-
-
             <!--Card content-->
             <form method="POST" class="card-body">
               {%csrf_token%}
+              <h2>Shipping Information</h2>
               {{ form|crispy }}
-             
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Order</button>
-
+              <h3>Payment Information</h3> 
+              {{ form2|crispy}} 
+              <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Order</button>            
             </form>
-
           </div>
+
           <!--/.Card-->
-
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-md-4 mb-4">
-
-
-          
 
         </div>
         <!--Grid column-->
