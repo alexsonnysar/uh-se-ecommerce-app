@@ -9,8 +9,8 @@ class CheckoutForm(forms.Form):
     street_address = forms.CharField(
         widget=forms.TextInput(attrs={"placeholder": "12345 Main Street Dr"})
     )
-    state = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "State"}))
     city = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "City"}))
+    state = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "State"}))
     zip = forms.CharField(widget=forms.TextInput(attrs={"placeholder": "XXXXX"}))
     country = CountryField(blank_label="(select country)").formfield(
         widget=CountrySelectWidget(attrs={"class": "custom-select d-block w-100"})
