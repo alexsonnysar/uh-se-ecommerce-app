@@ -26,6 +26,6 @@ smartystreets.py==0.4.0
 sqlparse==0.3.1
 toml==0.10.0
 typed-ast==1.4.1
-urllib3==1.25.9
+urllib3==1.26.5
 usps-api==0.4
 xmltodict==0.12.0
